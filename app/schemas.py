@@ -1,10 +1,10 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 class EmployeeBase(BaseModel):
-    name: str = Field(..., min_length=1, max_length=100)
-    age: int = Field(..., gt=0)
-    department: str = Field(..., min_length=1, max_length=100)
-    position: str = Field(..., min_length=1, max_length=100)
+    name: str
+    age: int
+    department: str
+    position: str
 
 class EmployeeCreate(EmployeeBase):
     pass
@@ -14,3 +14,22 @@ class Employee(EmployeeBase):
 
     class Config:
         orm_mode = True
+
+class UserBase(BaseModel):
+    username: str
+
+class UserCreate(UserBase):
+    password: str
+
+class User(UserBase):
+    id: int
+
+    class Config:
+        orm_mode = True
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+class TokenData(BaseModel):
+    username: str | None = None

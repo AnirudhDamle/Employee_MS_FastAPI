@@ -3,9 +3,14 @@ from .database import Base
 
 class Employee(Base):
     __tablename__ = "employees"
-
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, index=True, nullable=False)
-    age = Column(Integer, nullable=False)
-    department = Column(String, nullable=False)
-    position = Column(String, nullable=False)
+    name = Column(String, index=True)
+    age = Column(Integer)
+    department = Column(String)
+    position = Column(String)
+
+class User(Base):
+    __tablename__ = "users"
+    id = Column(Integer, primary_key=True, index=True)
+    username = Column(String, unique=True, index=True)
+    hashed_password = Column(String)
